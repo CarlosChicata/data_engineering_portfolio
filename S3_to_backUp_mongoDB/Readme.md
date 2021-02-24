@@ -13,7 +13,7 @@ Your linux server; EC2 in this example; has a mongodb instance to running. This 
 you need to generate a backup of database every day at 5am and save it in bucket S3.
 
 ## Tasks
-- [ ] Create script to create a backup of database in mongo.
+- [X] Create script to create a backup of database in mongo.
 - [ ] Send backup to S3 bucket.
 - [ ] Create EC2 and store script.
 - [ ] Create a cronjob in EC2 use the script and run 5am every day.
