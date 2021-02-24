@@ -14,6 +14,7 @@ you need to generate a backup of database every day at 5am and save it in bucket
 
 ## Tasks
 - [X] Create script to create a backup of database in mongo.
+- [ ] Create S3 in Bucket.
 - [ ] Send backup to S3 bucket.
 - [ ] Create EC2 and store script.
 - [ ] Create a cronjob in EC2 use the script and run 5am every day.
