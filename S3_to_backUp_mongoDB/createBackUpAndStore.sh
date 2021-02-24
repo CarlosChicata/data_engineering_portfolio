@@ -1,4 +1,3 @@
 #!/bin/sh
 file_path=`pwd`"/Readme.md"
-echo "$path_local$file"
-
+tar -cvzf 'ziping.tar.gz' $file_path
