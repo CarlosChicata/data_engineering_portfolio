@@ -4,28 +4,18 @@ Purpose:
 '''
 import json
 
-import boto3
-
-from utils import get_simpliflied_context, to_user_from_s3ol
-
-
-s3_client = boto3.client('s3')
-rekog_client = boto3.client('rekognition')
+from utils import get_simpliflied_context, to_user_from_s3ol, get_obj_from_s3, extract_text_from_image
 
 
 def lambda_handler(event, context):
     easy_context = get_simpliflied_context(event)
     
-    image = s3_client.get_object(
-            Bucket=easy_context["bucket"],
-            Key=easy_context["key"]
-        )
+    image = get_obj_from_s3(
+            bucket=easy_context["bucket"],
+            key=easy_context["key"]
+        ).get("Body").read()
 
-    image = image.get("Body").read()
-        
-    response = rekog_client.detect_text(Image={
-        'Bytes': image
-    })
+    response = extract_text_from_image(bytes=image)
     response =  [ line['DetectedText'] for line in response['TextDetections'] ]
     response = " ".join(response)
     
@@ -40,5 +30,3 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps('Success operation!')
     }
-
-
