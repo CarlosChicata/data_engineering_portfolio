@@ -11,6 +11,7 @@ We have reached an agreement with a client on the use of this information that w
 We use AWS cloud to create this service. I will use followed service.
 * Rekognition.
 * S3.
+* API Gateway.
 * Lambda function.
 
 The programming languaje to use to implement is python 3.8. Boto3 1.17.39 is a AWS SDK to connect with AWS Service.
