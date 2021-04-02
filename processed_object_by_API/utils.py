@@ -6,6 +6,7 @@ import boto3
 
 
 S3Client = boto3.client('s3')
+rekog_client = boto3.client('rekognition')
 
 
 def get_simpliflied_context(context):
@@ -25,6 +26,48 @@ def get_simpliflied_context(context):
     return simple_context
 
 
+def get_obj_from_s3(bucket, key):
+    '''
+    Purpose:
+        get object from s3 bucket.
+    Params:
+        - bucket (string) : name of bucket.
+        - key (string): name of object.
+    Return Object
+    '''
+    return S3Client.get_object(
+            Bucket=bucket,
+            Key=key
+        )
+
+
+def extract_text_from_image(bucket=None, key=None, bytes=None):
+    '''
+    Purpose:
+        extract text of image using rekognition service.
+    Params:
+        - bucket (string) : name of bucket.
+        - key (string): name of object.
+        - bytes (bytes) : image in bytes.
+    return a response of service.
+    '''
+    imageFields = {}
+
+    if bytes is not None:
+        imageFields = {
+            'Bytes': bytes
+        }
+    else:
+        imageFields = {
+            'S3Object': {
+                'Bucket': bucket,
+                'Name': key,
+            }
+        }
+
+    return rekog_client.detect_text(Image=imageFields)
+
+
 def to_user_from_s3ol(data, token, route):
     '''
     Purpose:
@@ -40,5 +83,4 @@ def to_user_from_s3ol(data, token, route):
             RequestRoute=route,
             RequestToken=token,
         )
-
-
+ 
