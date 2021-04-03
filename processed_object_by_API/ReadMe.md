@@ -10,8 +10,9 @@ We have reached an agreement with a client on the use of this information that w
 ## Tools and developer enviroment
 We use AWS cloud to create this service. I will use followed service.
 * Rekognition.
-* S3.
-* API Gateway.
+* S3: Standard.
+* API Gateway: HTTP API.
+* DynamoDB.
 * Lambda function.
 
 The programming languaje to use to implement is python 3.8. Boto3 1.17.39 is a AWS SDK to connect with AWS Service.
@@ -22,16 +23,31 @@ Soon on
 
 ## What services does money represent?
 
-Soon on
-
-## Limits
-
-Soon on
+* lambdas x2: 
+  * Accumulate computing time per request in month.
+  * Number of request to process in month.
+* Rekognition: 
+  * analyze of each image per month.
+* S3: 
+  *  Number Get request to object.
+  *  Capacity of stored data in bucket.
+  *  Capacity of data will return to caller using S3 object lambda .
+* API Gateway:
+  * Number of call to API HTTP.
+* DynamoDB:
+  * Capacity per GB in month.
+  * Number of write operation.
+  * Number of read operation.
 
 ## Learned lesson
 Those are:
 
 1) The rekognition services to detect text in image is available in specified regions. i need to move Canada region (ca-central-1) to north of virgin region (us-east-1) to use. I need to check what region has available services.
+2) Define policy in S3 to get public access to everyone.
+3) Get approximate the cost of usage all service by AWS.
 
 ## Version
 Current versión is 0.1.0
+
+## Ideas to optimize
+* Connect API Gateway with HTTP via GET request URL to trigger s3 object lambda function. i need to remove a extra lambda to wrapper s3 object lambda.
