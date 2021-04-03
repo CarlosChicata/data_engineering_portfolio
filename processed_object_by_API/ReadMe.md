@@ -18,8 +18,7 @@ We use AWS cloud to create this service. I will use followed service.
 The programming languaje to use to implement is python 3.8. Boto3 1.17.39 is a AWS SDK to connect with AWS Service.
 
 ## Diagrams
-
-Soon on
+![diagram of project](https://github.com/CarlosChicata/data_engineering_portfolio/blob/main/processed_object_by_API/proccess-object-by-api.png)
 
 ## What services does money represent?
 
